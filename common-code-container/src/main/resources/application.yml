@@ -1,0 +1,8 @@
+spring:
+  profiles:
+    active: local
+    group:
+      test:
+        - init-data-h2
+      local:
+        - init-data-mysql

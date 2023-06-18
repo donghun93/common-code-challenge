@@ -1,0 +1,12 @@
+project(':common-code-container') {
+    bootJar { enabled = true }
+    jar { enabled = true }
+
+    dependencies {
+        implementation project(':common-code-adapter:common-code-infra')
+        implementation project(':common-code-adapter:common-code-web')
+        implementation project(':common-code-data-init')
+        implementation project(':common-code-domain:common-code-application-service')
+        implementation 'org.springframework.boot:spring-boot-starter'
+    }
+}

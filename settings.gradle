@@ -1,0 +1,13 @@
+rootProject.name = 'common-code-challenge-system'
+
+include ':common-code-domain'
+include ':common-code-domain:common-code-domain-core'
+include ':common-code-domain:common-code-application-service'
+include ':common-code-data-init'
+include ':common-code-adapter'
+include ':common-code-adapter:common-code-web'
+include ':common-code-adapter:common-code-infra'
+include ':common'
+include ':common:common-domain'
+include ':common-code-container'
+

@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        queryDslVersion = "5.0.0"
+    }
+}
+
+
+plugins {
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+}
+
+project(':common-code-adapter:common-code-infra') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+
+    dependencies {
+        // Project
+        implementation project(':common:common-domain')
+        implementation project(':common-code-domain:common-code-application-service')
+        implementation project(':common-code-domain:common-code-domain-core')
+
+        // JPA
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+        // querydsl
+        implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+        annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}"
+
+        // H2
+        runtimeOnly 'com.h2database:h2'
+
+        // MySQL
+        runtimeOnly 'com.mysql:mysql-connector-j'
+
+        // Lombok
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+    }
+}
+
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+compileQuerydsl{
+    options.annotationProcessorPath = configurations.querydsl
+}
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    querydsl.extendsFrom compileClasspath
+}

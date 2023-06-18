@@ -1,0 +1,15 @@
+project(':common-code-domain:common-code-application-service') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter'
+        implementation 'org.springframework:spring-tx'
+
+        implementation project(':common-code-domain:common-code-domain-core')
+        implementation project(':common:common-domain')
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+    }
+}

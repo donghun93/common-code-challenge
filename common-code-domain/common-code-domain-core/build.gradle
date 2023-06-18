@@ -1,0 +1,9 @@
+project(':common-code-domain:common-code-domain-core') {
+    bootJar { enabled = false }
+    jar { enabled = true }
+
+    dependencies {
+        implementation project(':common:common-domain')
+
+    }
+}
